@@ -4,9 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-use function GuzzleHttp\Promise\all;
-
-class UpdateSurferRequest extends FormRequest
+class StoreBatteryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +21,10 @@ class UpdateSurferRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
-            "id" => "required | numeric | exists:surfers,id",
-            "name" => "nullable | string | max:100 | min:3",
-            "country" => "nullable | string | max:100",
+            'fk_surfer1' =>'required | numeric | integer | exists:surfers,id',
+            'fk_surfer2' =>'required | numeric | integer | exists:surfers,id',
+
         ];
     }
 }

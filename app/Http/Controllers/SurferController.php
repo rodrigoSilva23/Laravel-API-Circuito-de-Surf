@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSurferRequest;
 use App\Http\Requests\UpdateSurferRequest;
 use App\Models\surfer;
+use Illuminate\Database\QueryException;
 
 class surferController extends Controller
 {
@@ -55,9 +56,12 @@ class surferController extends Controller
      */
     public function update(UpdateSurferRequest $request, surfer $surfer)
     {
+        $surfer->update($request->all());
 
-        $retorno = $surfer->update($request->all());
-        return response()->json(['isPutSuccessful'=>$retorno], 200);
+        return response()->json([
+            'isPutSuccessful' => true,
+            'message' => 'surfer changed successfully'
+        ], 200);
     }
 
     /**
@@ -65,11 +69,29 @@ class surferController extends Controller
      */
     public function destroy($id)
     {
-        $surfer = surfer::where('id', $id)->delete();
+        try {
+            $surfer = Surfer::where('id', $id)->first();
+            if (!$surfer) {
+                return response()->json([
+                    'isDeletedSuccessful' => false,
+                    'message' => 'Surfer not found'
+                ], 404);
+            }
 
-        return response()->json([
-            'isDeletedSuccessful' => $surfer
-        ], 200);
+            $surfer->delete();
+
+            return response()->json([
+                'isDeletedSuccessful' => true,
+                'message' => 'Surfer deleted successfully'
+            ], 200);
+        } catch (QueryException $e) {
+            // Verifica se o erro é de violação de integridade referencial
+            if ($e->getCode() === '23000') {
+                return response()->json([
+                    'isDeletedSuccessful' => false,
+                    'message' => 'Unable to delete record due to foreign key constraints'
+                ], 422);
+            }
+        }
     }
-
 }

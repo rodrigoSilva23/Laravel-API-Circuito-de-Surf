@@ -100,27 +100,33 @@ class SurferControllerTest extends TestCase
 
         $response->assertJson([
             'isPutSuccessful'=> true,
+            'message'=>'surfer changed successfully'
         ]);
 
 
         $response = $this->putJson('/api/surfers/'.$surfer->id,[]);
         $response->assertStatus(422);
-        $response->assertJsonValidationErrors(['id','name','country']);
+        $response->assertJsonValidationErrors(['id']);
+
     }
 
     public function testDeletedSurfer(){
         $surfer = surfer::factory(1)->create()->first();
-
-
         $response = $this->delete('/api/surfers/'.$surfer->id);
 
-        // Verifica se a requisição foi bem-sucedida (código 200)
         $response->assertStatus(200);
-
         $response->assertJson([
+            'message'=> 'Surfer deleted successfully',
             'isDeletedSuccessful'=> true,
         ]);
 
+        $response = $this->delete('/api/surfers/10');
+
+        $response->assertStatus(404);
+        $response->assertJson([
+            'message'=> 'Surfer not found',
+            'isDeletedSuccessful'=> false,
+        ]);
 
     }
 }
