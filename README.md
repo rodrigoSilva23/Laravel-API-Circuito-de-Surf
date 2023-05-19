@@ -31,13 +31,13 @@ Antes de iniciar a instalação do projeto, verifique se você possui os seguint
 
 Certifique-se de ter todas as dependências necessárias instaladas antes de prosseguir com os seguintes passos.
 
-# Passo 1: Clonar o repositório
+### Passo 1: Clonar o repositório
 
 ```bash
   https://github.com/rodrigoSilva23/desafio-Laravel-API-Circuito-de-Surf.git
 ```
 
-# Passo 2: Instalar as dependências
+### Passo 2: Instalar as dependências
 
 ```bash
     cd desafio-Laravel-API-Circuito-de-Surf
@@ -47,7 +47,7 @@ Certifique-se de ter todas as dependências necessárias instaladas antes de pro
 
 Isso instalará todas as dependências listadas no arquivo composer.json e criará um diretório vendor com os pacotes necessários.
 
-# Passo 3: Configurar o ambiente
+### Passo 3: Configurar o ambiente
 
 ```bash
     DB_CONNECTION=mysql
@@ -59,7 +59,7 @@ Isso instalará todas as dependências listadas no arquivo composer.json e criar
 
 ```
 
-# Passo 4: Gerar chave de aplicação
+### Passo 4: Gerar chave de aplicação
 
 Execute o seguinte comando para gerar uma chave de aplicação Laravel:
 
@@ -69,7 +69,7 @@ Execute o seguinte comando para gerar uma chave de aplicação Laravel:
 ```
 isso gerará uma chave única para sua aplicação Laravel no arquivo .env.
 
-# Passo Final: Executar as migrações do banco de dados
+### Passo Final: Executar as migrações do banco de dados
 Para criar as tabelas necessárias no banco de dados, execute o seguinte comando:
 
 ```bash
