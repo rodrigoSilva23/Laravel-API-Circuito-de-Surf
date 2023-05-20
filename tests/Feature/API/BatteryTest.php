@@ -17,9 +17,9 @@ class BatteryTest extends TestCase
      */
     public function testGetAllBattery(): void
     {
-        Battery::factory(2)->Create();
 
-        $response = $this->get('/api/batterys');
+        Battery::factory(2)->Create();
+        $response = $this->get('/api/batteries');
 
         $response->assertStatus(200);
         $response->assertJsonCount(2);
@@ -29,7 +29,7 @@ class BatteryTest extends TestCase
     {
         $battery =  Battery::factory(2)->Create()->first();
 
-        $response = $this->get('/api/batterys/' . $battery->id);
+        $response = $this->get('/api/batteries/' . $battery->id);
 
         $response->assertStatus(200);
         $response->assertJsonCount(1);
@@ -42,8 +42,8 @@ class BatteryTest extends TestCase
             'fk_surfer1' => $surfers[0]->id,
             'fk_surfer2' => $surfers[1]->id,
         ];
-        $response = $this->post('/api/batterys', $data);
-
+        $response = $this->post('/api/batteries', $data);
+        
         $response->assertStatus(201);
         $response->assertJsonStructure([
             'id',
@@ -53,13 +53,13 @@ class BatteryTest extends TestCase
             'id' => 1,
             'isSuccessful' => true,
         ]);
-        $response = $this->postJson('/api/batterys', []);
+        $response = $this->postJson('/api/batteries', []);
         $response->assertJsonValidationErrors(['fk_surfer1','fk_surfer2']);
     }
 
     public function testDeletedBattery(){
         $battery = Battery::factory(1)->create()->first();
-        $response = $this->delete('/api/batterys/'.$battery->id);
+        $response = $this->delete('/api/batteries/'.$battery->id);
 
 
         $response->assertStatus(200);
@@ -68,7 +68,7 @@ class BatteryTest extends TestCase
             'isDeletedSuccessful'=> true,
         ]);
 
-        $response = $this->delete('/api/batterys/10');
+        $response = $this->delete('/api/batteries/10');
 
         $response->assertStatus(404);
         $response->assertJson([

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBatteryRequest;
 use App\Http\Requests\UpdateBatteryRequest;
 use App\Models\Battery;
-use App\Models\surfer;
+
 
 class BatteryController extends Controller
 {
@@ -79,7 +79,7 @@ class BatteryController extends Controller
      */
     public function destroy($id)
     {
-    
+
         $battery = Battery::where('id', $id)->first();
         if (!$battery) {
             return response()->json([

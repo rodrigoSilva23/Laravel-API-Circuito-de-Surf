@@ -22,8 +22,8 @@ class StoreSurferRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name"=>"required | string | max:100 | min:3",
-            "country"=>"required | string | max:100",
+            "name"=>"required|string|max:100|min:3",
+            "country"=>"required|string|max:100",
         ];
     }
 }

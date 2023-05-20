@@ -22,8 +22,8 @@ class UpdateBatteryRequest extends FormRequest
     public function rules(): array
     {
         return [
-           'fk_surfer1'=> 'nullable | numeric | integer | exists:surfers,id ',
-           'fk_surfer2'=> 'nullable | numeric | integer | exists:surfers,id '
+           'fk_surfer1'=> 'nullable|numeric|integer|exists:surfers,id',
+           'fk_surfer2'=> 'nullable|numeric|integer|exists:surfers,id'
         ];
     }
 }

@@ -89,7 +89,6 @@ class SurferControllerTest extends TestCase
         // Cria um surfer válido
         $surfer = surfer::factory(1)->create()->first();
         $data =[
-            'id'=>$surfer->id,
             'name' =>'rafael',
             'country' => 'brasil'
         ];
@@ -99,14 +98,9 @@ class SurferControllerTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertJson([
-            'isPutSuccessful'=> true,
-            'message'=>'surfer changed successfully'
+            'isPutSuccessful' => true,
+            'message' => 'surfer changed successfully'
         ]);
-
-
-        $response = $this->putJson('/api/surfers/'.$surfer->id,[]);
-        $response->assertStatus(422);
-        $response->assertJsonValidationErrors(['id']);
 
     }
 

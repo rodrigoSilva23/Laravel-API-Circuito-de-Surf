@@ -30,9 +30,10 @@ class surferController extends Controller
      */
     public function store(StoreSurferRequest $request)
     {
-        $data = $request->validated();
-        $surfer = surfer::create($data);
-        return $surfer;
+
+        $input = $request->validated();
+        $data = surfer::create($input);
+        return $data;
     }
 
     /**
@@ -54,9 +55,21 @@ class surferController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSurferRequest $request, surfer $surfer)
+    public function update(UpdateSurferRequest $request, string $id)
     {
-        $surfer->update($request->all());
+
+        $input = $request->validated();
+
+        $surfer = Surfer::find($id);
+
+        if (!$surfer) {
+            return response()->json([
+                'isPutSuccessful' => false,
+                'message' => 'Surfer not found'
+            ], 404);
+        }
+
+        $surfer->update($input);
 
         return response()->json([
             'isPutSuccessful' => true,

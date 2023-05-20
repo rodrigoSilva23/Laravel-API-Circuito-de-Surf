@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBatteryRequest extends FormRequest
+class StoreWavesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,9 +22,7 @@ class StoreBatteryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'fk_surfer1' =>'required|numeric|integer|exists:surfers,id',
-            'fk_surfer2' =>'required|numeric|integer|exists:surfers,id',
-
+            //
         ];
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\BatteryController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SurferController;
 
@@ -23,6 +22,6 @@ use App\Http\Controllers\SurferController;
 Route::middleware(['api'])->group(function () {
     // // Rotas que não requerem autenticação
      Route::resource("surfers", SurferController::class);
-     Route::resource("batterys", BatteryController::class);
+     Route::resource("batteries", BatteryController::class);
    //  Route::get('/surfistas/vencedor/{id}', [SurfistaController::class, 'vencedor']);
 });

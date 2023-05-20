@@ -25,9 +25,8 @@ class UpdateSurferRequest extends FormRequest
     {
 
         return [
-            "id" => "required | numeric | exists:surfers,id",
-            "name" => "nullable | string | max:100 | min:3",
-            "country" => "nullable | string | max:100",
+            "name" => "nullable|string|max:100|min:3",
+            "country" => "nullable|string|max:100",
         ];
     }
 }
