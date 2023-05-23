@@ -26,7 +26,7 @@ class UpdateSurferRequest extends FormRequest
 
         return [
             "name" => "nullable|string|max:100|min:3",
-            "country" => "nullable|string|max:100",
+            "country" => "nullable|string|min:3|max:100",
         ];
     }
 }

@@ -23,7 +23,7 @@ class StoreSurferRequest extends FormRequest
     {
         return [
             "name"=>"required|string|max:100|min:3",
-            "country"=>"required|string|max:100",
+            "country"=>"required|string|min:3|max:100",
         ];
     }
 }

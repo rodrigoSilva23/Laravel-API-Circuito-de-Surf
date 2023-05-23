@@ -11,7 +11,7 @@ class StoreWavesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreWavesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'fk_surfer' => "required|numeric|integer|exists:surfers,id",
+            'fk_battery' => "required|numeric|integer|exists:batteries,id"
         ];
     }
 }

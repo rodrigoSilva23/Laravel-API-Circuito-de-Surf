@@ -19,7 +19,7 @@ class WavesFactory extends Factory
     {
       Battery::factory(1)->Create();
         return [
-            'fk_batteries' => 1,
+            'fk_battery' => 1,
             'fk_surfer'=> fake()->numberBetween(1, 2)
         ];
     }

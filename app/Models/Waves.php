@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Waves extends Model
 {
     use HasFactory;
+
+     protected $fillable = ['fk_surfer','fk_battery'];
 }

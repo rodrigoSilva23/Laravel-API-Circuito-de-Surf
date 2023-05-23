@@ -3,6 +3,7 @@
 use App\Http\Controllers\BatteryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SurferController;
+use App\Http\Controllers\WavesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +24,6 @@ Route::middleware(['api'])->group(function () {
     // // Rotas que não requerem autenticação
      Route::resource("surfers", SurferController::class);
      Route::resource("batteries", BatteryController::class);
+     Route::resource("waves", WavesController::class);
    //  Route::get('/surfistas/vencedor/{id}', [SurfistaController::class, 'vencedor']);
 });

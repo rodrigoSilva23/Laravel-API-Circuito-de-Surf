@@ -19,61 +19,56 @@ class WavesTest extends TestCase
         Waves::factory(2)->Create();
 
         $response = $this->get('/api/waves');
-
         $response->assertStatus(200);
         $response->assertJsonCount(2);
     }
 
-    // public function testGetSingleWave()
-    // {
-    //     $Wave =  Waves::factory(2)->Create()->first();
+    public function testGetSingleWave()
+    {
+        $wave =  Waves::factory(2)->Create()->first();
 
-    //     $response = $this->get('/api/Waves/' . $Wave->id);
+        $response = $this->get('/api/waves/' . $wave->id);
+        $response->assertStatus(200);
+        $response->assertJsonCount(1);
+    }
 
-    //     $response->assertStatus(200);
-    //     $response->assertJsonCount(1);
-    // }
+    public function testPostWaveEndpoint()
+    {
+        $battery = Battery::factory(1)->Create()->first();
 
-    // public function testPostWave()
-    // {
-    //     $surfers = 1; // surfer::factory(2)->create();
-    //     $data = [
-    //         'fk_surfer1' => $surfers[0]->id,
-    //         'fk_surfer2' => $surfers[1]->id,
-    //     ];
-    //     $response = $this->post('/api/Waves', $data);
+        $data = [
+            'fk_battery' => $battery->id,
+            'fk_surfer' => $battery->fk_surfer1,
+        ];
+        $response = $this->post('/api/waves', $data);
 
-    //     $response->assertStatus(201);
-    //     $response->assertJsonStructure([
-    //         'id',
-    //         'isSuccessful',
-    //     ]);
-    //     $response->assertJson([
-    //         'id' => 1,
-    //         'isSuccessful' => true,
-    //     ]);
-    //     $response = $this->postJson('/api/Waves', []);
-    //     $response->assertJsonValidationErrors(['fk_surfer1', 'fk_surfer2']);
-    // }
+        $response->assertStatus(201);
 
-    // public function testDeletedWave()
-    // {
-    //     $Wave = Waves::factory(1)->create()->first();
-    //     $response = $this->delete('/api/Waves/' . $Wave->id);
+        $response->assertJson([
+            'isCreatedSuccessful' => true,
+            'message' => 'created successful'
+        ]);
+        $response = $this->postJson('/api/waves', []);
+        $response->assertJsonValidationErrors(['fk_battery', 'fk_surfer']);
+    }
+    public function testDeletedWave()
+    {
+        $Wave = Waves::factory(1)->create()->first();
+        $response = $this->delete('/api/waves/' . $Wave->id);
 
 
-    //     $response->assertStatus(200);
-    //     $response->assertJson([
-    //         'message' => 'Wave deleted successfully',
-    //         'isDeletedSuccessful' => true,
-    //     ]);
+        $response->assertStatus(200);
+        $response->assertJson([
+            'message' => 'wave deleted successfully',
+            'isDeletedSuccessful' => true,
+        ]);
 
-    //     $response = $this->delete('/api/Waves/10');
+        $response = $this->delete('/api/waves/10');
 
-    //     $response->assertStatus(404);
-    //     $response->assertJson([
-    //         'message' => 'Wave not found',
-    //         'isDeletedSuccessful' => false,
-    //     ]);
-    // }
+        $response->assertStatus(404);
+        $response->assertJson([
+            'message' => 'wave not found',
+            'isDeletedSuccessful' => false,
+        ]);
+    }
 }
