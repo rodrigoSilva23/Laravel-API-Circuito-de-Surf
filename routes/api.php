@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BatteryController;
+use App\Http\Controllers\GradesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SurferController;
 use App\Http\Controllers\WavesController;
@@ -25,5 +26,6 @@ Route::middleware(['api'])->group(function () {
      Route::resource("surfers", SurferController::class);
      Route::resource("batteries", BatteryController::class);
      Route::resource("waves", WavesController::class);
+     Route::resource("grades", GradesController::class);
    //  Route::get('/surfistas/vencedor/{id}', [SurfistaController::class, 'vencedor']);
 });
