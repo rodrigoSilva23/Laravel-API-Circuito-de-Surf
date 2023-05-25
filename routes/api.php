@@ -27,5 +27,5 @@ Route::middleware(['api'])->group(function () {
      Route::resource("batteries", BatteryController::class);
      Route::resource("waves", WavesController::class);
      Route::resource("grades", GradesController::class);
-   //  Route::get('/surfistas/vencedor/{id}', [SurfistaController::class, 'vencedor']);
+     Route::get("batteries/winner/{id}", [BatteryController::class,'batteryWinner']);
 });
