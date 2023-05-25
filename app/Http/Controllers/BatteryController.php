@@ -99,6 +99,12 @@ class BatteryController extends Controller
     public function batteryWinner($id)
     {
         config()->set('database.connections.mysql.strict', false);
+        $battery = Battery::where('id', $id)->first();
+            if (!$battery) {
+                return response()->json([
+                    'message' => 'battery not found'
+                ], 404);
+            }
         $results = Battery::join('waves', 'batteries.id', '=', 'waves.fk_battery')
         ->join('grades', 'waves.id', '=', 'grades.fk_wave')
         ->select(
